@@ -11,11 +11,12 @@
   "dependencies": {
     "express": "~4.11.x",
     "kerberos": "~0.0.x",
-    "parse": "~1.8.0",
+    "parse": "~2.8.0",
     "parse-server": "*"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "APP_ID=myAppId MASTER_KEY=helloworld node index.js",
+    "dashboard": "parse-dashboard --dev --appId myAppId --masterKey helloworld --serverURL http://localhost:1337/parse"
   },
   "engines": {
     "node": ">=4.3"

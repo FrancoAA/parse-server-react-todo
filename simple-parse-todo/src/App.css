@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.Todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Todo-list li {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.Todo-list li.completed {
+  text-decoration: line-through;;
+}
