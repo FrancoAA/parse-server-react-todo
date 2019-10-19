@@ -6,7 +6,17 @@
   color: #09d3ac;
 }
 
+.Container {
+  position: absolute;
+  text-align: center;
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
 .Todo-list {
+  display: table-cell;
+  vertical-align: middle;
   list-style: none;
   margin: 0;
   padding: 0;

@@ -129,19 +129,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ul className="Todo-list">
-          {this.props.data.map(t => 
-            <li key={t.objectId} className={t.completed ? 'completed' : ''}>
-              <button onClick={() => this.removeTodoItem(t)}>X</button>
-              {t.description}
-              <button onClick={() => this.setEditTodo(t)}>Edit</button>
-              <input type="checkbox" checked={t.completed} readOnly onClick={() => this.toggleCompleted(t)} />
+        <div className="Container">
+          <ul className="Todo-list">
+            {this.props.data.map(t => 
+              <li key={t.objectId} className={t.completed ? 'completed' : ''}>
+                <button onClick={() => this.removeTodoItem(t)}>X</button>
+                {t.description}
+                <button onClick={() => this.setEditTodo(t)}>Edit</button>
+                <input type="checkbox" checked={t.completed} readOnly onClick={() => this.toggleCompleted(t)} />
+              </li>
+            )}
+            <li>
+              <AddTodoComponent onCreate={this.addTodoItem} onUpdate={this.updateTodoItem} todo={this.state.todo}/>
             </li>
-          )}
-          <li>
-            <AddTodoComponent onCreate={this.addTodoItem} onUpdate={this.updateTodoItem} todo={this.state.todo}/>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
     );
   }
