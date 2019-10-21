@@ -1,9 +1,37 @@
 import React, { Component, useRef, useEffect } from 'react';
 import Parse from 'parse';
 
+import {
+  IonApp,
+  IonContent,
+  IonHeader,
+  IonFooter,
+  IonTitle,
+  IonToolbar,
+  IonCheckbox,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonButton,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
+  IonItemGroup,
+  IonItemDivider
+} from '@ionic/react';
+
 import ParseLiveQueryHOC from '../common/ParseLiveQuery';
 
-import './TodoApp.css';
+import './TodoApp.scss';
+
+import '@ionic/core/css/core.css';
+import '@ionic/core/css/ionic.bundle.css';
 
 const AddTodoComponent = ({ todo, onCreate, onUpdate }) => {
   const inputEl = useRef(null);
@@ -18,17 +46,17 @@ const AddTodoComponent = ({ todo, onCreate, onUpdate }) => {
       return;
     }
 
-    if (!todo.objectId) {
-      onCreate({ description: e.target.value.trim() });
-    } else {
+    if (todo && todo.objectId) {
       onUpdate({ ...todo, description: e.target.value.trim() });
+    } else {
+      onCreate({ description: e.target.value.trim() });
     }
 
     e.target.value = '';
   };
 
   return (
-    <input type="text" ref={inputEl} onKeyUp={handleEvent}/>
+    <IonInput ref={inputEl} placeholder="Something todo..." onKeyUp={handleEvent}></IonInput>
   )
 };
 
@@ -66,25 +94,51 @@ class TodoApp extends Component {
     this.setState({ todo: null })
   };
 
+  handleInput = (e) => {
+    if (e.keyCode === 13) {
+      console.log('Text: ', e.target.value);
+    }
+  };
+
   render() {
     return (
-      <div className="App">
-        <div className="Container">
-          <ul className="Todo-list">
-            {this.props.data.map(t => 
-              <li key={t.objectId} className={t.completed ? 'completed' : ''}>
-                <button onClick={() => this.removeTodoItem(t)}>X</button>
-                {t.description}
-                <button onClick={() => this.setEditTodo(t)}>Edit</button>
-                <input type="checkbox" checked={t.completed} readOnly onClick={() => this.toggleCompleted(t)} />
-              </li>
-            )}
-            <li>
+      <IonApp>
+        <IonHeader>
+          <IonToolbar color="primary">
+            <IonTitle>Todo</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          {/*-- List of Text Items --*/}
+          <IonList>
+            {this.props.data.map(todo => (
+            <IonItemSliding>
+              <IonItemOptions side="start">
+                <IonItemOption color="success" onClick={() => this.setEditTodo(todo)}>Edit</IonItemOption>
+              </IonItemOptions>
+
+              <IonItem key={todo.objectId}>
+                <IonLabel>
+                  <span className={todo.completed ? 'completed' : undefined}>{todo.description}</span>
+                </IonLabel>
+                <IonCheckbox checked={todo.completed} onClick={() => this.toggleCompleted(todo)}/>
+              </IonItem>
+
+              <IonItemOptions side="end">
+                <IonItemOption color="danger" onClick={() => this.removeTodoItem(todo)}>Remove</IonItemOption>
+              </IonItemOptions>
+            </IonItemSliding>
+            ))}
+          </IonList>
+        </IonContent>
+        <IonFooter>
+          <IonToolbar>
+            <IonTitle>
               <AddTodoComponent onCreate={this.addTodoItem} onUpdate={this.updateTodoItem} todo={this.state.todo}/>
-            </li>
-          </ul>
-        </div>
-      </div>
+            </IonTitle>
+          </IonToolbar>
+        </IonFooter>
+      </IonApp>
     );
   }
 }
