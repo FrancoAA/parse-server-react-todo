@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import Parse from 'parse';
 
 const ParseLiveQueryHOC = (C, { applicationId, serverURL, masterKey, subscriptionQuery }) => {

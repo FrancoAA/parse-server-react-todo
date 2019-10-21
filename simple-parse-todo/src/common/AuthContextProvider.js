@@ -1,18 +1,18 @@
 import Parse from 'parse'
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
-AuthContext = React.createContext();
+const AuthContext = React.createContext();
 
-initialState = {
+const initialState = {
   user: null,
-  isLoggedIn: false
+  isLoggedIn: false,
+  errorMessage: null
 };
-
 
 const AuthProvider = props => {
   const [auth, setAuth] = useState(initialState);
 
-  handleSignUp = async({ username, email, password }) => {
+  const handleSignUp = async({ username, email, password }) => {
     let user = new Parse.User();
     user.set('username', username);
     user.set('email', email);
@@ -22,22 +22,20 @@ const AuthProvider = props => {
       await user.signUp();
       setAuth({ user, isLoggedIn: true });  // We shouldn't be storing Parse.Objects on the state
     } catch (error) {
-      setAuth({ user: null, isLoggedIn: false });
-      handleAuthError(error);
+      setAuth({ user: null, isLoggedIn: false, errorMessage: error.message });
     }
   };
 
-  handleLogin = async({ username, password }) => {
+  const handleLogin = async({ username, password }) => {
     try {
       const user = await Parse.User.logIn(username, password);
       setAuth({ user, isLoggedIn: true });  // We shouldn't be storing Parse.Objects on the state
     } catch (error) {
-      setAuth({ user: null, isLoggedIn: false });
-      handleAuthError(error);
+      setAuth({ user: null, isLoggedIn: false, errorMessage: error.message });
     }
   };
 
-  handleLogout = async() => {
+  const handleLogout = async() => {
     try {
       await Parse.User.logOut();
     } finally {
@@ -45,12 +43,20 @@ const AuthProvider = props => {
     }
   };
 
-  handleAuthError = (error) => {
+  const handleAuthError = (error) => {
     console.log("Error: " + error.code + " " + error.message);
   };
 
+
+
   return (
-    <AuthContext.Provider values={{ ...auth, handleSignUp, handleLogin, handleLogout, handleAuthError }}>
+    <AuthContext.Provider value={{
+      handleSignUp, 
+      handleLogin, 
+      handleLogout, 
+      handleAuthError,
+      ...auth
+      }}>
       {props.children}
     </AuthContext.Provider>
   )
