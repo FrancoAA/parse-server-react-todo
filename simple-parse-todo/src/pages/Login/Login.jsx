@@ -87,8 +87,8 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
             {errorMessage && (<IonItem>{errorMessage}</IonItem>)}
 
             <div className="ion-padding">
-              <button type="submit">{signUp ? 'Sign Up' : 'Login'}</button>
-              <button onClick={(e) => toggleMode(e)}>{signUp ? 'Login': 'Sign Up'}</button>
+              <IonButton type="submit" expand="block">{signUp ? 'Sign Up' : 'Login'}</IonButton>
+              <IonButton fill="outline" expand="block" onClick={(e) => toggleMode(e)}>{signUp ? 'Login': 'Sign Up'}</IonButton>
             </div>
           </IonList>
         </form>
