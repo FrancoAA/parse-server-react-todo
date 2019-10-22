@@ -1,66 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useForm from "react-hook-form";
+
+import {
+  IonApp,
+  IonContent,
+  IonHeader,
+  IonFooter,
+  IonTitle,
+  IonToolbar,
+  IonCheckbox,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonButton,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
+  IonItemGroup,
+  IonItemDivider
+} from '@ionic/react';
 
 import './LoginPage.scss';
 
 const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
 
   const [signUp, setSignUp] = useState(false);
-  const { handleSubmit, register, errors } = useForm();
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+  const updateValues = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value.trim() }));
+  }
 
   const toggleMode = (event) => {
     event.preventDefault();
     setSignUp(prev => !prev);
   };
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     if (signUp) {
-      await handleSignUp(values);
+      await handleSignUp(formData);
     }
     else {
-      await handleLogin(values);
+      await handleLogin(formData);
     }
   };
 
   return (
-    <div className="LoginPage">
-      <div className="LoginPage-Container">
-        <form name="loginForm" onSubmit={handleSubmit(onSubmit)}>
+    <IonApp>
+      <IonHeader>
+        <IonToolbar color="primary">
+          <IonTitle>Login</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-          <fieldset>
-            <label htmlFor="username">Username</label>
-            <input type="text" name="username" ref={register({required: 'Required'})} />
-            {errors.username && errors.username.message}
-          </fieldset>
+      <IonContent>
+        <form name="loginForm" onSubmit={onSubmit}>
+          <IonList>
+            <IonItem>
+              <IonLabel>Username</IonLabel>
+              <IonInput name="username" type="text" required onIonChange={updateValues}/>
+            </IonItem>
 
-          {signUp && (
-            <fieldset>
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" ref={
-                register({
-                  required: 'Required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    message: "invalid email address"
-                  }
-                })
-              }/>
-              {errors.email && errors.email.message}
-            </fieldset>
-          )}
+            {signUp && (
+              <IonItem>
+                <IonLabel>Email</IonLabel>
+                <IonInput name="email" type="email" required onIonChange={updateValues}/>
+              </IonItem>
+            )}
 
-          <fieldset>
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" ref={register({required: 'Required'})}/>
-            {errors.password && errors.password.message}
-          </fieldset>
+            <IonItem>
+              <IonLabel>Password</IonLabel>
+              <IonInput name="password" type="password" required onIonChange={updateValues}/>
+            </IonItem>
 
-          {errorMessage && (<p>{errorMessage}</p>)}
-          <button type="submit">{signUp ? 'Sign Up' : 'Login'}</button>
-          <button onClick={(e) => toggleMode(e)}>{signUp ? 'Login': 'Sign Up'}</button>
+            {errorMessage && (<IonItem>{errorMessage}</IonItem>)}
+
+            <div className="ion-padding">
+              <button type="submit">{signUp ? 'Sign Up' : 'Login'}</button>
+              <button onClick={(e) => toggleMode(e)}>{signUp ? 'Login': 'Sign Up'}</button>
+            </div>
+          </IonList>
         </form>
-      </div>
-    </div>
+      </IonContent>
+    </IonApp>
   );
 };
 

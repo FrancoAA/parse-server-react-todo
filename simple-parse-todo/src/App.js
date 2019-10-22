@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TodoApp from './TodoApp/TodoApp';
 import LoginPage from './pages/Login/Login';
 
+import '@ionic/core/css/core.css';
+import '@ionic/core/css/ionic.bundle.css';
 
 const App = (props) => {
   return (

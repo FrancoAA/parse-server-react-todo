@@ -30,9 +30,6 @@ import ParseLiveQueryHOC from '../common/ParseLiveQuery';
 
 import './TodoApp.scss';
 
-import '@ionic/core/css/core.css';
-import '@ionic/core/css/ionic.bundle.css';
-
 const AddTodoComponent = ({ todo, onCreate, onUpdate }) => {
   const inputEl = useRef(null);
 
