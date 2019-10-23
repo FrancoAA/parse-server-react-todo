@@ -9,12 +9,8 @@ import {
   IonTitle,
   IonToolbar,
   IonCheckbox,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonButton,
+  IonButtons,
+  IonIcon,
   IonList,
   IonItem,
   IonLabel,
@@ -22,8 +18,7 @@ import {
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
-  IonItemGroup,
-  IonItemDivider
+
 } from '@ionic/react';
 
 import ParseLiveQueryHOC from '../common/ParseLiveQuery';
@@ -103,6 +98,9 @@ class TodoApp extends Component {
         <IonHeader>
           <IonToolbar color="primary">
             <IonTitle>Todo</IonTitle>
+            <IonButtons slot="end">
+              <IonIcon slot="icon-only" name="create" />
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
         <IonContent>

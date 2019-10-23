@@ -1,0 +1,29 @@
+.Compose {
+  .Camera-container {
+    display: table;
+    width: 100%;
+
+    .Camera-select-picture {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 160px;
+    }
+  }
+
+  .Publish-Btn-Container {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .Spacing {
+    height: 48px;
+    width: 100%;
+  }
+
+  p {
+    margin: 0;
+  }
+}

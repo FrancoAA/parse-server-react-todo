@@ -7,6 +7,8 @@ import LoginPage from './pages/Login/Login';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 
+import ComposePage from './pages/Compose/Compose';
+
 const App = (props) => {
   return (
     <AuthProvider>
