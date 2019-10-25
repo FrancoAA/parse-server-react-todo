@@ -32,9 +32,9 @@ const ChatPage = () => {
     <IonPage className="Chat">
       <IonHeader>
         <IonToolbar>
-          {/* <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab2" />
-          </IonButtons> */}
+          <IonButtons slot="start">
+            <IonBackButton />
+          </IonButtons>
           <IonTitle>Chat</IonTitle>
         </IonToolbar>
       </IonHeader>

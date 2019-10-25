@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  IonApp,
+  IonPage,
   IonContent,
   IonHeader,
   IonToolbar,
@@ -23,15 +23,7 @@ import { Toggler } from '../../common/Toggler';
 
 const ComposePage = () => {
   return (
-    <IonApp className="Compose">
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
-          </IonButtons>
-          <IonTitle>Compose</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <IonPage className="Compose">
 
       <IonContent>
         <IonList>
@@ -66,7 +58,7 @@ const ComposePage = () => {
       <div className="Publish-Btn-Container">
         <IonButton expand="block" type="submit" class="ion-no-margin">Publish</IonButton>
       </div>
-    </IonApp>
+    </IonPage>
   );
 };
 

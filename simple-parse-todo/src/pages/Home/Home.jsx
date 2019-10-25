@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  IonApp,
+  IonPage,
   IonContent,
   IonHeader,
   IonTitle,
@@ -26,15 +26,10 @@ const HomePage = () => {
   }
 
   return (
-    <IonApp>
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Posts</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+    <IonPage>
       <IonContent>
-        {posts.map(post => (
-          <IonCard button={true}>
+        {posts.map((post, key) => (
+          <IonCard button={true} key={key} routerLink={`/home/jobs/${key}`}>
             <img src={post.image}/>
             <IonCardHeader>
               <IonCardContent>{post.description}</IonCardContent>
@@ -42,7 +37,7 @@ const HomePage = () => {
           </IonCard>
         ))}
       </IonContent>
-    </IonApp>
+    </IonPage>
   );
 };
 

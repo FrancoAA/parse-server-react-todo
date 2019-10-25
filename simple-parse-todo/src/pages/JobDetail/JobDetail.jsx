@@ -22,11 +22,11 @@ import {
 
 import PageHeader from '../../common/PageHeader/PageHeader';
 
-import './ChatList.scss';
+import './JobDetail.scss';
 
 import { Toggler } from '../../common/Toggler';
 
-const ChatList = () => {
+const JobDetail = () => {
   const [section, setSection] = useState('chats');
 
   let chats = [];
@@ -40,12 +40,12 @@ const ChatList = () => {
   }
 
   return (
-    <IonPage className="ChatList">
+    <IonPage className="JobDetail">
       <IonHeader translucent>
         <IonToolbar>
-          {/* <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab2" />
-          </IonButtons> */}
+          <IonButtons slot="start">
+            <IonBackButton defaultHref/>
+          </IonButtons>
           <IonTitle>Chat List</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -53,7 +53,7 @@ const ChatList = () => {
       <IonContent fullscreen>
         <PageHeader title="This is a test" subtitle="Create on May 9 at 20:20 PM" image="https://loremflickr.com/640/360"/>
 
-        <div className="ion-padding">
+        <div>
           <IonSegment onIonChange={e => setSection(e.detail.value)}>
             <IonSegmentButton value="chats" checked={section === 'chats'}>
               <IonLabel>Chats</IonLabel>
@@ -69,8 +69,8 @@ const ChatList = () => {
           <div className="chats-section">
             <IonListHeader>Recent messages</IonListHeader>
             <IonList>
-              {chats.map(chat => (
-                <IonItem>
+              {chats.map((chat, key) => (
+                <IonItem key={key} routerLink={`/home/jobs/1/chats/${key}`}>
                   <IonAvatar slot="start">
                     <img src={chat.avatar}/>
                   </IonAvatar>
@@ -86,19 +86,19 @@ const ChatList = () => {
 
         {section === 'details' && (
           <div className="details-section">
+            {/* Description */}
+            <IonListHeader>Description</IonListHeader>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, tempor arcu mauris sed odio justo, volutpat blandit risus cubilia curabitur rhoncus. Metus praesent dictum tempus, accumsan orci vulputate eros, neque cras.</p>
+
             {/* Category */}
             <IonListHeader>Category</IonListHeader>
             <p className="toggler-Container">
               <Toggler name="Plumbering"/>
             </p>
 
-            {/* Description */}
-            <IonListHeader>Description</IonListHeader>
-
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, tempor arcu mauris sed odio justo, volutpat blandit risus cubilia curabitur rhoncus. Metus praesent dictum tempus, accumsan orci vulputate eros, neque cras.</p>
-
             <div className="ion-padding">
-              <IonButton expand="block" fill="outline" color="danger">Delete</IonButton>
+              <IonButton expand="block" fill="outline" color="primary">Finish</IonButton>
             </div>
           </div>
         )}
@@ -108,4 +108,4 @@ const ChatList = () => {
   );
 };
 
-export default ChatList;
+export default JobDetail;

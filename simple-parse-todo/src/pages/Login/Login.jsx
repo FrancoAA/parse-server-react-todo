@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useForm from "react-hook-form";
 
 import {
-  IonApp,
+  IonPage,
   IonContent,
   IonHeader,
   IonFooter,
@@ -57,7 +57,7 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
   };
 
   return (
-    <IonApp>
+    <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
           <IonTitle>Login</IonTitle>
@@ -93,7 +93,7 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
           </IonList>
         </form>
       </IonContent>
-    </IonApp>
+    </IonPage>
   );
 };
 
