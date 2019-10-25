@@ -1,0 +1,36 @@
+.PageHeader {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+  display: table;
+  z-index: 0;
+
+  .text-container {
+    display: table-cell;
+    vertical-align: bottom;
+    padding: 16px;
+    z-index: 1;
+    h3, p {
+      color: white;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: #000;
+    // opacity: 40%;
+    z-index: -1;
+    min-height: 200px;
+    max-height: 200px;
+    background: linear-gradient(0deg, black 0%, transparent 100%)
+  }
+}
