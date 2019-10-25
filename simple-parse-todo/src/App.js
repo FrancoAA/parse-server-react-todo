@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { AuthConsumer, AuthProvider } from './common/AuthContextProvider';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import TodoApp from './TodoApp/TodoApp';
+// import TodoApp from './TodoApp/TodoApp';
+import HomePage from './pages/Home/Home';
 import LoginPage from './pages/Login/Login';
+import ChatPage from './pages/Chat/Chat';
+import ChatList from './pages/ChatList/ChatList';
 
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
@@ -11,7 +14,14 @@ import ComposePage from './pages/Compose/Compose';
 
 const App = (props) => {
   return (
-    <AuthProvider>
+    <ChatList/>
+  );
+};
+
+export default App;
+
+/*
+<AuthProvider>
       <AuthConsumer>
         {({isLoggedIn, handleSignUp, handleLogin, errorMessage}) => (
           <div>
@@ -27,7 +37,4 @@ const App = (props) => {
         )}
       </AuthConsumer>
     </AuthProvider>
-  );
-};
-
-export default App;
+*/

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Parse from 'parse';
 
 const ParseLiveQueryHOC = (C, { applicationId, serverURL, masterKey, subscriptionQuery }) => {
+  console.log('Executed!');
 
   Parse.initialize(applicationId, masterKey);
   Parse.serverURL = serverURL;
@@ -12,14 +13,14 @@ const ParseLiveQueryHOC = (C, { applicationId, serverURL, masterKey, subscriptio
     masterKey
   });
 
-  client.open();
-
   return class extends Component {
     state = {
       data: []
     };
 
     async componentDidMount() {
+      // Connect to the server
+      client.open();
       // Set the initial data
       const parseData = await subscriptionQuery.find();
       const nativeData = parseData.map(d => d.toJSON());
