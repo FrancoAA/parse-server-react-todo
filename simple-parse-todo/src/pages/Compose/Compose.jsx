@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   IonApp,
@@ -11,8 +11,6 @@ import {
   IonIcon,
   IonListHeader,
   IonTextarea,
-  IonLabel,
-  IonChip,
   IonButton,
   IonButtons,
   IonBackButton
@@ -21,20 +19,7 @@ import {
 import { camera } from 'ionicons/icons';
 
 import './Compose.scss';
-
-const Toggler = ({ name }) => {
-  const [selected, setSelected] = useState(true);
-
-  const toggleSelected = () => {
-    setSelected(prev => !prev);
-  };
-
-  return (
-    <IonChip color="primary" outline={selected} onClick={toggleSelected}>
-      <IonLabel>{name}</IonLabel>
-    </IonChip>
-  );
-};
+import { Toggler } from '../../common/Toggler';
 
 const ComposePage = () => {
   return (
