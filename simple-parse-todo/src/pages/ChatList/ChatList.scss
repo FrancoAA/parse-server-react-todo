@@ -1,0 +1,19 @@
+
+.ChatList {
+  ion-segment {
+    padding: 5px;
+  }
+  
+  .details-section {
+    p {
+      margin: 0;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  .toggler-Container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
