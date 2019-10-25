@@ -4,8 +4,9 @@
   "private": true,
   "dependencies": {
     "@ionic/react": "^4.11.1",
+    "date-fns": "^2.6.0",
     "ionicons": "^4.6.3",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "parse": "^2.7.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

@@ -14,30 +14,36 @@ import {
   IonButton
 } from '@ionic/react';
 
-const HomePage = () => (
-  <IonApp>
-    <IonHeader>
-      <IonToolbar color="primary">
-        <IonTitle>Todo</IonTitle>
-      </IonToolbar>
-    </IonHeader>
-    <IonContent>
-      <IonCard>
-        <IonCardHeader>
-          <IonCardTitle>
-            News title
-          </IonCardTitle>
-          <IonCardSubtitle>
-            News subtitle
-          </IonCardSubtitle>
+const HomePage = () => {
 
-        </IonCardHeader>
-        <IonCardContent>
-          <IonButton >Read</IonButton>
-        </IonCardContent>
-      </IonCard>
-    </IonContent>
-  </IonApp>
-);
+  let posts = [];
+  for (let index = 0; index < 3; index++) {
+    posts.push({
+      image: 'https://via.placeholder.com/100px',
+      description: 'This is the description of the job',
+      category: 'plumbing'
+    });
+  }
+
+  return (
+    <IonApp>
+      <IonHeader>
+        <IonToolbar color="primary">
+          <IonTitle>Posts</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        {posts.map(post => (
+          <IonCard button={true}>
+            <img src={post.image}/>
+            <IonCardHeader>
+              <IonCardContent>{post.description}</IonCardContent>
+            </IonCardHeader>
+          </IonCard>
+        ))}
+      </IonContent>
+    </IonApp>
+  );
+};
 
 export default HomePage;
