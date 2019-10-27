@@ -1,0 +1,37 @@
+.Profile {
+
+  .Profile-picture{
+    padding: var(--ion-padding, 16px) var(--ion-padding, 16px) 0 var(--ion-padding, 16px);
+    text-align: center;
+    img {
+      width: 100px;
+      height: 100px;
+      padding: 2px;
+      border-radius: 50%;
+      border: 2px solid var(--ion-color-primary, #3880ff);
+    }
+  }
+
+  .Profile-userinfo {
+    padding: var(--ion-padding, 16px);
+    text-align: center;
+    color: #333;
+    font-weight: 500;
+    letter-spacing: 1px;
+    .Rating {
+      padding: 8px;
+      color: gold;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  .Container {
+    width: 100%;
+    height: auto;
+    background-color: #f6f7fa;
+  }
+
+}
+
