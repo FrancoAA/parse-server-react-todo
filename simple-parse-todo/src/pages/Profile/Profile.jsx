@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import {
-  IonBackButton,
-  IonButtons,
-  IonHeader,
   IonPage,
-  IonToolbar,
-  IonTitle,
   IonContent,
-  IonAvatar,
-  IonList,
-  IonItem,
   IonLabel,
   IonSegment,
   IonSegmentButton
 } from "@ionic/react";
 
 import Rating from "../../common/Rating/Rating";
+import ReviewsList from './components/ReviewList/ReviewsList';
+import PastJobs from './components/PastJobs/PastJobs';
 
 import "./Profile.scss";
 
 const ProfilePage = () => {
-  const [section, setSection] = useState("chats");
+  const [section, setSection] = useState("reviews");
+
+  let reviews = [];
+  for (let index = 0; index < 5; index++) {
+    reviews.push({
+      id: index,
+      rating: 3.5,
+      avatar: 'https://i.pravatar.cc/64',
+      username: `User ${index}`,
+      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis leo, tristique vitae erat eget, rutrum volutpat neque. Suspendisse cras amet.`,
+      date: 'Today'
+    });
+  }
 
   return (
     <IonPage className="Profile">
@@ -39,14 +45,21 @@ const ProfilePage = () => {
         </div>
 
         <IonSegment mode="md" onIonChange={e => setSection(e.detail.value)}>
-          <IonSegmentButton mode="md" value="chats" checked={section === "chats"}>
+          <IonSegmentButton mode="md" value="pastjobs" checked={section === "pastjobs"}>
             <IonLabel>Jobs</IonLabel>
           </IonSegmentButton>
-          <IonSegmentButton mode="md" value="details" checked={section === "details"}>
+          <IonSegmentButton mode="md" value="reviews" checked={section === "reviews"}>
             <IonLabel>Reviews</IonLabel>
           </IonSegmentButton>
         </IonSegment>
 
+        {section === 'reviews' && (
+          <ReviewsList reviews={reviews}/>
+        )}
+
+        {section === 'pastjobs' && (
+          <PastJobs/>
+        )}
       </IonContent>
     </IonPage>
   );

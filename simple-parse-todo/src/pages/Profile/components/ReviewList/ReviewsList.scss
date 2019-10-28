@@ -1,0 +1,14 @@
+.ReviewsList {
+  .stars-container {
+    .Rating {
+      display: inline;
+      padding: 0;
+    }
+    .date {
+      float: right;
+      font-size: 12px;
+      line-height: 20px;
+      opacity: 0.4;
+    }
+  }
+}
