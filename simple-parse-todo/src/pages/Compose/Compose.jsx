@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { Plugins, CameraResultType } from '@capacitor/core';
 
@@ -15,7 +16,9 @@ import {
   IonTextarea,
   IonButton,
   IonButtons,
-  IonBackButton
+  IonBackButton,
+  IonLabel,
+  IonInput
 } from '@ionic/react';
 
 import { camera } from 'ionicons/icons';
@@ -25,6 +28,16 @@ import { Toggler } from '../../common/Toggler';
 
 const ComposePage = () => {
   const [imgUri, setImageUri] = useState(null);
+  const inputEl = useRef(null);
+
+  useEffect(() => {
+    async function getAddressFromGeolocation() {
+      const { coords } = await Plugins.Geolocation.getCurrentPosition();
+      const { data } = await axios.post(`https://nominatim.openstreetmap.org/search?q=${coords.latitude},${coords.longitude}&format=json`);
+      inputEl.current.value = data[0].display_name;
+    }
+    getAddressFromGeolocation();
+  }, []);
 
   const takePicture = async() => {
     const image = await Plugins.Camera.getPhoto({
@@ -64,6 +77,12 @@ const ComposePage = () => {
             <Toggler name="Handyman"/>
             <Toggler name="Gardener"/>
           </p>
+
+          {/* Description */}
+          <IonListHeader>Location</IonListHeader>
+          <IonItem>
+            <IonInput ref={inputEl} placeholder="Address"/>
+          </IonItem>
 
           {/* Description */}
           <IonListHeader>Give a description</IonListHeader>
