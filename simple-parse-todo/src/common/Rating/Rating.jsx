@@ -1,17 +1,31 @@
 import React from 'react';
-import { star as starIcon } from 'ionicons/icons';
+import { star, starHalf, starOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
+
+import './Rating.scss';
 
 const Rating = ({ rating }) => {
   let stars = [];
-  for (let index=1;index < rating; index++) {
-    stars.push(1);
+  let remainder = rating % 1;
+  let wholeStars = rating - remainder;
+  let count = 5;
+
+  while (count > 0) {
+    stars.push(
+      <IonIcon key={count} icon={
+        wholeStars > 0 
+        ? star 
+        : remainder && wholeStars > -1
+        ? starHalf
+        : starOutline }>
+      </IonIcon>
+    );
+    count--;
+    wholeStars--
   }
 
-  console.log(stars);
-
   return (
-    <p className='Rating'>{stars.map((star, key) => (<IonIcon key={key} icon={starIcon}></IonIcon>))}</p>
+    <div className='Rating'>{stars}</div>
   );
 };
 

@@ -34,7 +34,7 @@ const ProfilePage = () => {
           <div className="Profile-userinfo">
             <p>Franco Alarcon</p>
             <small>Member since: 4th July</small>
-            <Rating rating={4.5}/>
+            <Rating rating={3.5}/>
           </div>
         </div>
 
