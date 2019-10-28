@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   IonPage,
   IonContent,
@@ -8,13 +9,15 @@ import {
 } from "@ionic/react";
 
 import Rating from "../../common/Rating/Rating";
+import { randomInt } from "../../common/utils";
 import ReviewsList from './components/ReviewList/ReviewsList';
-import PastJobs from './components/PastJobs/PastJobs';
+import About from './components/About/About';
+import Photos from './components/Photos/Photos';
 
 import "./Profile.scss";
 
 const ProfilePage = () => {
-  const [section, setSection] = useState("reviews");
+  const [section, setSection] = useState("photos");
 
   let reviews = [];
   for (let index = 0; index < 5; index++) {
@@ -24,7 +27,16 @@ const ProfilePage = () => {
       avatar: 'https://i.pravatar.cc/64',
       username: `User ${index}`,
       text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis leo, tristique vitae erat eget, rutrum volutpat neque. Suspendisse cras amet.`,
-      date: 'Today'
+      date: new Date()
+    });
+  }
+
+  let photos = [];
+  for (let index = 0; index < 13; index++) {
+    photos.push({
+      id: index,
+      thumbnail: `https://loremflickr.com/${randomInt(100, 64)}/${randomInt(100, 64)}`,
+      full_size: 'https://loremflickr.com/640/360'
     });
   }
 
@@ -45,20 +57,27 @@ const ProfilePage = () => {
         </div>
 
         <IonSegment mode="md" onIonChange={e => setSection(e.detail.value)}>
-          <IonSegmentButton mode="md" value="pastjobs" checked={section === "pastjobs"}>
-            <IonLabel>Jobs</IonLabel>
+          <IonSegmentButton mode="md" value="about" checked={section === "about"}>
+            <IonLabel>About</IonLabel>
+          </IonSegmentButton>
+          <IonSegmentButton mode="md" value="photos" checked={section === "photos"}>
+            <IonLabel>Photos</IonLabel>
           </IonSegmentButton>
           <IonSegmentButton mode="md" value="reviews" checked={section === "reviews"}>
             <IonLabel>Reviews</IonLabel>
           </IonSegmentButton>
         </IonSegment>
 
-        {section === 'reviews' && (
-          <ReviewsList reviews={reviews}/>
+        {section === 'about' && (
+          <About/>
         )}
 
-        {section === 'pastjobs' && (
-          <PastJobs/>
+        {section === 'photos' && (
+          <Photos photos={photos}/>
+        )}
+
+        {section === 'reviews' && (
+          <ReviewsList reviews={reviews}/>
         )}
       </IonContent>
     </IonPage>

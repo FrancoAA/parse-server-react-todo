@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { format, formatDistanceToNow } from 'date-fns';
+
 import {
   IonAvatar,
   IonList,
@@ -23,7 +25,7 @@ const ReviewsList = ({ reviews }) => {
         <IonLabel className="ion-text-wrap">
           <div className="stars-container">
             <Rating rating={review.rating}/>
-            <span className="date">{review.date}</span>
+            <span className="date">{formatDistanceToNow(review.date, { addSuffix: true })}</span>
           </div>
           <p>{review.text}</p>
         </IonLabel>
