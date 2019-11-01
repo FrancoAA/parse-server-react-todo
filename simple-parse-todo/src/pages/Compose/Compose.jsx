@@ -40,18 +40,22 @@ const ComposePage = () => {
   }, []);
 
   const takePicture = async() => {
-    const image = await Plugins.Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri
-    });
-    // image.webPath will contain a path that can be set as an image src. 
-    // You can access the original file using image.path, which can be 
-    // passed to the Filesystem API to read the raw data of the image, 
-    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    var imageUrl = image.webPath;
-    // Can be set to the src of an image now
-    setImageUri(imageUrl);
+    try {
+      const image = await Plugins.Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri
+      });
+      // image.webPath will contain a path that can be set as an image src. 
+      // You can access the original file using image.path, which can be 
+      // passed to the Filesystem API to read the raw data of the image, 
+      // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+      var imageUrl = image.webPath;
+      // Can be set to the src of an image now
+      setImageUri(imageUrl);
+    } catch (error) {
+      alert(error);
+    }
   }
 
   return (
@@ -63,10 +67,10 @@ const ComposePage = () => {
           {/* Picture */}
           <IonListHeader>Select an Image</IonListHeader>
           <div className="Camera-container ion-padding">
-            <div className="Camera-select-picture" onClick={takePicture}>
+            <button className="Camera-select-picture" onClick={takePicture}>
               {!imgUri && <IonIcon icon={camera}></IonIcon>}
               {imgUri && <img src={imgUri} alt="picture"/>}
-            </div>
+            </button>
           </div>
 
           {/* Category */}

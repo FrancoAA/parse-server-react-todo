@@ -10,9 +10,19 @@ const initialState = {
 };
 
 const AuthProvider = props => {
+  const { fake } = props;
   const [auth, setAuth] = useState(initialState);
 
   const handleSignUp = async({ username, email, password }) => {
+    if (fake) {
+      if ((username === 'admin') && (password === 'admin')) {
+        setAuth({ user: { username, email }, isLoggedIn: true });
+      } else {
+        setAuth({ user: null, isLoggedIn: false, errorMessage: 'Wrong user or password!' });
+      }
+      return;
+    }
+
     let user = new Parse.User();
     user.set('username', username);
     user.set('email', email);
@@ -27,6 +37,15 @@ const AuthProvider = props => {
   };
 
   const handleLogin = async({ username, password }) => {
+    if (fake) {
+      if ((username === 'admin') && (password === 'admin')) {
+        setAuth({ user: { username }, isLoggedIn: true });
+      } else {
+        setAuth({ user: null, isLoggedIn: false, errorMessage: 'Wrong user or password!' });
+      }
+      return;
+    }
+    
     try {
       const user = await Parse.User.logIn(username, password);
       setAuth({ user, isLoggedIn: true });  // We shouldn't be storing Parse.Objects on the state
@@ -36,6 +55,11 @@ const AuthProvider = props => {
   };
 
   const handleLogout = async() => {
+    if (fake) {
+      setAuth({ user: null, isLoggedIn: false });
+      return;
+    }
+
     try {
       await Parse.User.logOut();
     } finally {

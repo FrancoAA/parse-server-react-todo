@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import useForm from "react-hook-form";
 
 import {
@@ -24,34 +24,33 @@ import {
   IonItemOption,
   IonItemGroup,
   IonItemDivider
-} from '@ionic/react';
+} from "@ionic/react";
 
-import './LoginPage.scss';
+import "./LoginPage.scss";
+import { AuthConsumer } from "../../common/AuthContextProvider";
 
 const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
-
   const [signUp, setSignUp] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
+    username: "",
+    email: "",
+    password: ""
   });
 
-  const updateValues = (e) => {
+  const updateValues = e => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value.trim() }));
-  }
+  };
 
-  const toggleMode = (event) => {
+  const toggleMode = event => {
     event.preventDefault();
     setSignUp(prev => !prev);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (signUp) {
       await handleSignUp(formData);
-    }
-    else {
+    } else {
       await handleLogin(formData);
     }
   };
@@ -69,26 +68,49 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
           <IonList>
             <IonItem>
               <IonLabel>Username</IonLabel>
-              <IonInput name="username" type="text" required onIonChange={updateValues}/>
+              <IonInput
+                name="username"
+                type="text"
+                required
+                onIonChange={updateValues}
+              />
             </IonItem>
 
             {signUp && (
               <IonItem>
                 <IonLabel>Email</IonLabel>
-                <IonInput name="email" type="email" required onIonChange={updateValues}/>
+                <IonInput
+                  name="email"
+                  type="email"
+                  required
+                  onIonChange={updateValues}
+                />
               </IonItem>
             )}
 
             <IonItem>
               <IonLabel>Password</IonLabel>
-              <IonInput name="password" type="password" required onIonChange={updateValues}/>
+              <IonInput
+                name="password"
+                type="password"
+                required
+                onIonChange={updateValues}
+              />
             </IonItem>
 
-            {errorMessage && (<IonItem>{errorMessage}</IonItem>)}
+            {errorMessage && <IonItem>{errorMessage}</IonItem>}
 
             <div className="ion-padding">
-              <IonButton type="submit" expand="block">{signUp ? 'Sign Up' : 'Login'}</IonButton>
-              <IonButton fill="outline" expand="block" onClick={(e) => toggleMode(e)}>{signUp ? 'Login': 'Sign Up'}</IonButton>
+              <IonButton type="submit" expand="block">
+                {signUp ? "Sign Up" : "Login"}
+              </IonButton>
+              <IonButton
+                fill="outline"
+                expand="block"
+                onClick={e => toggleMode(e)}
+              >
+                {signUp ? "Login" : "Sign Up"}
+              </IonButton>
             </div>
           </IonList>
         </form>
@@ -97,4 +119,19 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
   );
 };
 
-export default LoginPage;
+const LoginWithAuth = ({ protectedComponent: ProtectedComponent }) => (
+  <AuthConsumer>
+    {({ isLoggedIn, handleSignUp, handleLogin, errorMessage }) =>
+      isLoggedIn ? ProtectedComponent
+: (
+        <LoginPage
+          handleLogin={handleLogin}
+          handleSignUp={handleSignUp}
+          errorMessage={errorMessage}
+        />
+      )
+    }
+  </AuthConsumer>
+);
+
+export {LoginPage, LoginWithAuth};

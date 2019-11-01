@@ -9,6 +9,8 @@
     "@ionic/react-router": "^4.11.2",
     "axios": "^0.19.0",
     "date-fns": "^2.6.0",
+    "express": "^4.17.1",
+    "http-proxy": "^1.18.0",
     "ionicons": "^4.6.3",
     "node-sass": "^4.13.0",
     "parse": "^2.7.1",
