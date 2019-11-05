@@ -1,5 +1,6 @@
 import React from 'react';
 import { IonGrid, IonRow, IonCol, IonContent, IonThumbnail } from '@ionic/react';
+import ImageLoader from '../../../../common/ImageLoader/ImageLoader';
 
 import './Photos.scss';
 
@@ -12,6 +13,7 @@ const Photos = ({ photos }) => {
   
   while(photosCopy.length > 0) {
     const row = photosCopy.splice(0, remainder ? photosPerColumn + remainder : photosPerColumn).map(photo => (
+      // <ImageLoader key={photo.id} src={photo.thumbnail} alt="thumbnail"/>
       <img key={photo.id} src={photo.thumbnail} alt="thumbnail"/>
     ));
     remainder = 0;

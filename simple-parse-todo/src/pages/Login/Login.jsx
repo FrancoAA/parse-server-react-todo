@@ -27,6 +27,8 @@ import {
 } from "@ionic/react";
 
 import "./LoginPage.scss";
+import TextInput from './components/TextInput';
+
 import { AuthConsumer } from "../../common/AuthContextProvider";
 
 const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
@@ -37,8 +39,8 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
     password: ""
   });
 
-  const updateValues = e => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value.trim() }));
+  const updateValues = (name, value) => {
+    setFormData(prev => ({ ...prev, [name]: value.trim() }));
   };
 
   const toggleMode = event => {
@@ -56,64 +58,32 @@ const LoginPage = ({ handleSignUp, handleLogin, errorMessage }) => {
   };
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+    <IonPage className="LoginPage">
       <IonContent>
-        <form name="loginForm" onSubmit={onSubmit}>
-          <IonList>
-            <IonItem>
-              <IonLabel>Username</IonLabel>
-              <IonInput
-                name="username"
-                type="text"
-                required
-                onIonChange={updateValues}
-              />
-            </IonItem>
-
+        <div className="LoginContainer">
+          <form name="loginForm" onSubmit={onSubmit}>
+            <TextInput name="username" type="text" placeholder="Username" onChange={e => updateValues(e.target.name, e.target.value)}/>
             {signUp && (
-              <IonItem>
-                <IonLabel>Email</IonLabel>
-                <IonInput
-                  name="email"
-                  type="email"
-                  required
-                  onIonChange={updateValues}
-                />
-              </IonItem>
+              <TextInput name="email" type="email" placeholder="Email" onChange={e => updateValues(e.target.name, e.target.value)}/>
             )}
+            <TextInput name="password" type="password" placeholder="Password" onChange={e => updateValues(e.target.name, e.target.value)}/>
 
-            <IonItem>
-              <IonLabel>Password</IonLabel>
-              <IonInput
-                name="password"
-                type="password"
-                required
-                onIonChange={updateValues}
-              />
-            </IonItem>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-            {errorMessage && <IonItem>{errorMessage}</IonItem>}
-
-            <div className="ion-padding">
-              <IonButton type="submit" expand="block">
-                {signUp ? "Sign Up" : "Login"}
-              </IonButton>
-              <IonButton
-                fill="outline"
-                expand="block"
-                onClick={e => toggleMode(e)}
-              >
-                {signUp ? "Login" : "Sign Up"}
-              </IonButton>
-            </div>
-          </IonList>
-        </form>
+              <div className="ion-padding">
+                <IonButton type="submit" expand="block">
+                  {signUp ? "Sign Up" : "Login"}
+                </IonButton>
+                <IonButton
+                  fill="outline"
+                  expand="block"
+                  onClick={e => toggleMode(e)}
+                >
+                  {signUp ? "Login" : "Sign Up"}
+                </IonButton>
+              </div>
+          </form>
+        </div>
       </IonContent>
     </IonPage>
   );
