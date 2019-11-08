@@ -21,6 +21,7 @@ import ChatPage from './pages/Chat/Chat';
 import JobDetail from './pages/JobDetail/JobDetail';
 import ProfilePage from './pages/Profile/Profile';
 import ComposePage from './pages/Compose/Compose';
+import ExplorePage from './pages/Explore/Explore';
 
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
@@ -33,7 +34,7 @@ const App = () => {
           <IonReactRouter>
             <IonTabs>
               <IonRouterOutlet>
-                <Route path="/home" component={HomePage} exact={true} />
+                <Route path="/home" component={ExplorePage} exact={true} />
                 <Route path="/home/jobs/:jobId" component={JobDetail} exact={true}/>
                 <Route path="/home/jobs/:jobId/chats/:chatId" component={ChatPage} />
                 <Route path="/publish" component={ComposePage} exact={true} />
